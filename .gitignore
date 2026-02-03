@@ -43,3 +43,8 @@ __pycache__/
 
 # python notebooks
 *.ipynb
+
+# Project Dumps
+main_project_dump.txt
+project_dump.txt
+project_dump.py
