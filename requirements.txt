@@ -4,4 +4,8 @@ python-dotenv
 langchain_community
 langchain
 langchain_openai
-langchain_google_generativeai
+langchain-google-genai
+
+## UI Related
+flask
+werkzeug

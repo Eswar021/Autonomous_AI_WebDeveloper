@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WEB DEV AI</title>
+    <meta
+      name="description"
+      content="WEB DEV AI — Autonomous AI Agent for prompt-first static website generation."
+    />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">WD</div>
+        <div class="brand-text">
+          <div class="brand-title">WEB DEV AI</div>
+          <div class="brand-subtitle">
+            Autonomous AI Agent — Prompt-first website generator with asset uploads
+          </div>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <button id="clearBtn" class="btn btn-secondary">Clear / New</button>
+        <button id="openPreviewBtn" class="btn btn-primary" disabled>Open Full Preview</button>
+        <button id="historyBtn" class="btn btn-secondary">History</button>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="panel left">
+        <div class="panel-header">
+          <h2>Prompt</h2>
+          <div class="panel-hint">Describe what you want to build. Upload assets if needed.</div>
+        </div>
+
+        <textarea
+          id="prompt"
+          class="textarea"
+          placeholder="Example: Build a modern cafe landing page with menu, gallery, and contact form. Use the uploaded logo in the header and the coffee photos in the gallery."
+        ></textarea>
+
+        <div class="uploader">
+          <div class="uploader-header">
+            <h3>Assets Upload</h3>
+            <div class="uploader-hint">
+              Drag & drop files here, or click to browse. Add optional descriptions per asset.
+            </div>
+          </div>
+
+          <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="Upload assets">
+            <div class="dz-row">
+              <div class="dz-icon">⬆</div>
+              <div class="dz-text">
+                <div class="dz-title">Drop files here</div>
+                <div class="dz-subtitle">or click to browse</div>
+              </div>
+              <button id="browseBtn" type="button" class="btn btn-secondary btn-small">Choose files</button>
+            </div>
+            <div class="dz-meta" id="dzMeta">Accepted: images, videos, any assets you want to use</div>
+          </div>
+
+          <!-- hidden input, triggered by dropzone / button -->
+          <input id="assetInput" type="file" multiple hidden />
+
+          <div id="assetList" class="asset-list"></div>
+        </div>
+
+        <div class="run-row">
+          <button id="runBtn" class="btn btn-primary">Generate Site</button>
+          <div id="runStatus" class="status"></div>
+        </div>
+
+        <div class="meta">
+          <div class="meta-row">
+            <span class="meta-label">Run ID:</span>
+            <span id="runId" class="meta-value">—</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Download:</span>
+            <a id="downloadLink" class="meta-link" href="#" target="_blank" rel="noreferrer">—</a>
+          </div>
+        </div>
+
+        <div class="manifest">
+          <details>
+            <summary>Site Manifest</summary>
+            <pre id="siteManifest" class="pre"></pre>
+          </details>
+
+          <details>
+            <summary>Assets Manifest</summary>
+            <pre id="assetsManifest" class="pre"></pre>
+          </details>
+
+          <details>
+            <summary>Final Response</summary>
+            <pre id="finalResponse" class="pre"></pre>
+          </details>
+        </div>
+      </section>
+
+      <section class="panel right">
+        <div class="panel-header">
+          <h2>Preview</h2>
+          <div class="panel-hint">
+            Preview loads from history so it always matches your download.
+          </div>
+        </div>
+
+        <div class="preview-wrap">
+          <iframe id="previewFrame" class="preview" title="Site Preview"></iframe>
+        </div>
+
+        <div class="tabs">
+          <button class="tab active" data-tab="html">HTML</button>
+          <button class="tab" data-tab="css">CSS</button>
+          <button class="tab" data-tab="js">JS</button>
+        </div>
+
+        <div class="code">
+          <pre id="codeBlock" class="code-pre"></pre>
+        </div>
+      </section>
+    </main>
+
+    <!-- History modal -->
+    <div id="historyModal" class="modal hidden" aria-hidden="true">
+      <div class="modal-card">
+        <div class="modal-head">
+          <div class="modal-title">Run History</div>
+          <button id="closeHistory" class="btn btn-secondary btn-small">Close</button>
+        </div>
+        <div id="historyList" class="history-list"></div>
+      </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
